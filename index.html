@@ -8,11 +8,11 @@
     <body>
         <script src="script.js" defer></script>
         <dialog id="favDialog">
-            <form>
+            <form id="newBookForm">
                 <ul>
                     <li>
                       <label for="title">Title:</label>
-                      <input type="text" id="title" name="book_title" />
+                      <input type="text" id="title" name="book_title" autofocus/>
                     </li>
                     <li>
                       <label for="author">Author:</label>
@@ -25,12 +25,12 @@
                     <li>
                         <legend> Have you read the book?</legend>
                         <div>
-                            <label for="read">Yes</label>
-                            <input type="radio" id="read" name="yes">
+                            <label for="yes">Yes</label>
+                            <input type="radio" id="yes" name="if_read" checked>
                         </div>
                         <div>
-                            <label for="not_read">No</label>
-                            <input type="radio" id="not_read" name="no">
+                            <label for="no">No</label>
+                            <input type="radio" id="no" name="if_read">
                         </div>
                     </li>
                   </ul>
@@ -43,7 +43,6 @@
         <p>
         <button id="showDialog">Show the dialog</button>
         </p>
-        <output></output>
           
     </body>
 </html>

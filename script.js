@@ -44,38 +44,41 @@ function displayLibrary() {
     });
 }
 
+function displayNewBook(book) {
+    let div = document.createElement("div");
+    let ul = document.createElement("ul");
+    div.classList.add("card");
+    ul.classList.add("card-list");
+    div.id = book.title;
+    ul.id = `${book.title}-list`;
+    document.body.appendChild(div);
+    document.getElementById(book.title).appendChild(ul);
+    for (const key in book) {
+        if (key != "info"){
+            let li = document.createElement("li");
+            li.innerHTML = book[key];
+            document.getElementById(`${book.title}-list`).appendChild(li);
+        }
+    }
+}
+
 const showButton = document.getElementById("showDialog");
 const favDialog = document.getElementById("favDialog");
-const outputBox = document.querySelector("output");
-const selectEl = favDialog.querySelector("select");
 const confirmBtn = favDialog.querySelector("#confirmBtn");
 
-// "Show the dialog" button opens the <dialog> modally
-showButton.addEventListener("click", () => {
+showButton.addEventListener("click", (event) => {
   favDialog.showModal();
+  document.getElementById("newBookForm").reset();
 });
 
-// "Favorite animal" input sets the value of the submit button
-selectEl.addEventListener("change", (e) => {
-  confirmBtn.value = selectEl.value;
-});
-
-// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
-favDialog.addEventListener("close", (e) => {
-  outputBox.value =
-    favDialog.returnValue === "default"
-      ? "No return value."
-      : `ReturnValue: ${favDialog.returnValue}.`; // Have to check for "default" rather than empty string
-});
-
-// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method, which triggers the "close" event.
 confirmBtn.addEventListener("click", (event) => {
-  event.preventDefault(); // We don't want to submit this fake form
-  favDialog.close(selectEl.value); // Have to send the select box value here.
+  event.preventDefault();
+  let radio = favDialog.querySelector('input[type=radio][name=if_read]:checked');
+  let newBook = new Book(title.value, author.value, pages.value, radio.id);
+  console.log(newBook);
+  addBookToLibrary(newBook);
+  displayNewBook(newBook);
+  favDialog.close();
 });
 
 
-
-addBookToLibrary(theHobbit);
-addBookToLibrary(Dune);
-displayLibrary();
