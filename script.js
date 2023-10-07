@@ -44,6 +44,7 @@ function displayNewBook(book) {
     document.body.appendChild(div);
     document.getElementById(book.title).appendChild(header);
     document.getElementById(book.title).appendChild(ul);
+    removeButton(book);
     for (const key in book) {
         if (key === "author") {
             let li = document.createElement("li");
@@ -80,9 +81,21 @@ confirmBtn.addEventListener("click", (event) => {
   favDialog.close();
 });
 
-
+function removeButton(book) {
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove-buttons");
+    removeButton.innerHTML = "X"
+    document.getElementById(book.title).appendChild(removeButton);
+    removeButton.addEventListener("click", () => {
+        console.log(myLibrary.indexOf(book));
+        myLibrary.splice(myLibrary.indexOf(book), 1);
+        console.log(myLibrary);
+        document.getElementById(book.title).remove();
+    })
+}
 
 addBookToLibrary(theHobbit);
 addBookToLibrary(Dune);
 displayLibrary();
+console.log(myLibrary);
 
