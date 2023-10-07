@@ -26,37 +26,36 @@ function addBookToLibrary(book) {
 
 function displayLibrary() {
     myLibrary.forEach(Book => {
-        let div = document.createElement("div");
-        let ul = document.createElement("ul");
-        div.classList.add("card");
-        ul.classList.add("card-list");
-        div.id = Book.title;
-        ul.id = `${Book.title}-list`;
-        document.body.appendChild(div);
-        document.getElementById(Book.title).appendChild(ul);
-        for (const key in Book) {
-            if (key != "info"){
-                let li = document.createElement("li");
-                li.innerHTML = Book[key];
-                document.getElementById(`${Book.title}-list`).appendChild(li);
-            }
-        }
+        displayNewBook(Book);
     });
 }
 
 function displayNewBook(book) {
     let div = document.createElement("div");
     let ul = document.createElement("ul");
+    let header = document.createElement("div");
     div.classList.add("card");
     ul.classList.add("card-list");
+    header.classList.add("header-title");
     div.id = book.title;
     ul.id = `${book.title}-list`;
+    header.id = `${book.title}-header`;
+    header.innerHTML = book.title.toUpperCase();
     document.body.appendChild(div);
+    document.getElementById(book.title).appendChild(header);
     document.getElementById(book.title).appendChild(ul);
     for (const key in book) {
-        if (key != "info"){
+        if (key === "author") {
             let li = document.createElement("li");
-            li.innerHTML = book[key];
+            li.innerHTML = `Author: ${book[key]}`;
+            document.getElementById(`${book.title}-list`).appendChild(li);
+        } if (key === "pages") {
+            let li = document.createElement("li");
+            li.innerHTML = `Pages: ${book[key]}`;
+            document.getElementById(`${book.title}-list`).appendChild(li);
+        } if (key === "read") {
+            let li = document.createElement("li");
+            li.innerHTML = `Have you read the book: ${book[key]}`;
             document.getElementById(`${book.title}-list`).appendChild(li);
         }
     }
@@ -81,4 +80,9 @@ confirmBtn.addEventListener("click", (event) => {
   favDialog.close();
 });
 
+
+
+addBookToLibrary(theHobbit);
+addBookToLibrary(Dune);
+displayLibrary();
 
