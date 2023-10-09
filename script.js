@@ -8,7 +8,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.info = function() {
-        if (read === true){
+        if (read === "yes"){
             return `${title} by ${author}, ${pages} pages, read.`
         } else {
             return `${title} by ${author}, ${pages} pages, not read yet.`
@@ -16,8 +16,8 @@ function Book(title, author, pages, read) {
     }
 }
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
-const Dune = new Book("Dune", "Frank Herbert", 295, true);
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "yes");
+const Dune = new Book("Dune", "Frank Herbert", 295, "yes");
 console.log(theHobbit);
 
 function addBookToLibrary(book) {
@@ -31,32 +31,34 @@ function displayLibrary() {
 }
 
 function displayNewBook(book) {
-    let div = document.createElement("div");
-    let ul = document.createElement("ul");
-    let header = document.createElement("div");
+    const div = document.createElement("div");
+    const ul = document.createElement("ul");
+    const header = document.createElement("div");
     div.classList.add("card");
     ul.classList.add("card-list");
     header.classList.add("header-title");
     div.id = book.title;
     ul.id = `${book.title}-list`;
     header.id = `${book.title}-header`;
-    header.innerHTML = book.title.toUpperCase();
+    header.textContent = book.title.toUpperCase();
     document.body.appendChild(div);
     document.getElementById(book.title).appendChild(header);
     document.getElementById(book.title).appendChild(ul);
     removeButton(book);
+    toggleStatus(book);
     for (const key in book) {
         if (key === "author") {
             let li = document.createElement("li");
-            li.innerHTML = `Author: ${book[key]}`;
+            li.textContent = `Author: ${book[key]}`;
             document.getElementById(`${book.title}-list`).appendChild(li);
         } if (key === "pages") {
             let li = document.createElement("li");
-            li.innerHTML = `Pages: ${book[key]}`;
+            li.textContent = `Pages: ${book[key]}`;
             document.getElementById(`${book.title}-list`).appendChild(li);
         } if (key === "read") {
             let li = document.createElement("li");
-            li.innerHTML = `Have you read the book: ${book[key]}`;
+            li.id = `${book.title}-status`;
+            li.textContent = `Status: ${book[key]}`;
             document.getElementById(`${book.title}-list`).appendChild(li);
         }
     }
@@ -84,7 +86,7 @@ confirmBtn.addEventListener("click", (event) => {
 function removeButton(book) {
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove-buttons");
-    removeButton.innerHTML = "X"
+    removeButton.textContent = "X"
     document.getElementById(book.title).appendChild(removeButton);
     removeButton.addEventListener("click", () => {
         console.log(myLibrary.indexOf(book));
@@ -92,6 +94,25 @@ function removeButton(book) {
         console.log(myLibrary);
         document.getElementById(book.title).remove();
     })
+}
+
+function toggleStatus(book) {
+    const toggleButton = document.createElement("button");
+    toggleButton.classList.add("toggle-buttons");
+    toggleButton.textContent = "Change read status";
+    document.getElementById(book.title).appendChild(toggleButton);
+    toggleButton.addEventListener("click", () => {
+        if (book.read === "read") {
+            book.read = "not read";
+            document.getElementById(`${book.title}-status`).textContent = `Status: ${book.read}`;
+            console.log(book);
+        } else {
+            book.read = "read";
+            document.getElementById(`${book.title}-status`).textContent = `Status: ${book.read}`;
+            console.log(book);
+        }
+    })
+
 }
 
 addBookToLibrary(theHobbit);
