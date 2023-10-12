@@ -41,7 +41,7 @@ function displayNewBook(book) {
     ul.id = `${book.title}-list`;
     header.id = `${book.title}-header`;
     header.textContent = book.title.toUpperCase();
-    document.body.appendChild(div);
+    document.getElementById("main").appendChild(div);
     document.getElementById(book.title).appendChild(header);
     document.getElementById(book.title).appendChild(ul);
     removeButton(book);

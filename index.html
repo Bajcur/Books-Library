@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head lang="en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <meta charset="utf-8">
         <title>My Library</title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <script src="script.js" defer></script>
+        <div id="header">
+            <div class="header-text">
+                Your private library
+                <span class="material-symbols-outlined">
+                    library_books
+                </span>
+            </div>
+        </div>
+        <div id="main">main
+            <div class="main-text"> Click the button bellow to add a new book to your library</div>
+            <p>
+                <button id="showDialog">Add New Book</button>
+            </p>
+        </div>
+        <div id="footer">
+            <p>
+                Copyright ©
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>
+                szymonhabel
+            </p>
+            <a href="https://github.com/Bajcur" target="_blank">
+                <img src="github-mark-white.svg" alt=""
+                style="height: 20px;">
+            </a>
+        </div>
         <dialog id="favDialog">
             <form id="newBookForm">
                 <ul>
@@ -40,9 +68,6 @@
                 </div>
             </form>
         </dialog>
-        <p>
-        <button id="showDialog">Add New Book</button>
-        </p>
           
     </body>
 </html>

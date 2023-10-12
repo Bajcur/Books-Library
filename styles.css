@@ -1,4 +1,31 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: minmax(70px, 1fr) minmax(700px, 20px) minmax(70px, 1fr);
+  font-family: 'Raleway', sans-serif;
+}
 
+#header {
+  background-color: #0284c7 ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-text {
+  color: whitesmoke;
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#main {
+  background-color: #e0f2fe ;
+  box-shadow: inset 0px 8px 24px -16px rgba(66, 68, 90, 1);
+}
 
 .card {
     border: solid black 2px;
@@ -14,3 +41,20 @@
     );
     opacity: 0.75;
   }
+
+#footer {
+  background-color: #0284c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#footer > p {
+  color: whitesmoke;
+  margin-right: 5px;
+}
+
+img:hover {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate(360deg) scale(1.2);
+}
