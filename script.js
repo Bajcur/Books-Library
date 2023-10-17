@@ -16,8 +16,8 @@ function Book(title, author, pages, read) {
     }
 }
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "yes");
-const Dune = new Book("Dune", "Frank Herbert", 295, "yes");
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "read");
+const Dune = new Book("Dune", "Frank Herbert", 295, "read");
 console.log(theHobbit);
 
 function addBookToLibrary(book) {
@@ -41,7 +41,7 @@ function displayNewBook(book) {
     ul.id = `${book.title}-list`;
     header.id = `${book.title}-header`;
     header.textContent = book.title.toUpperCase();
-    document.getElementById("main").appendChild(div);
+    document.getElementById("shelves").appendChild(div);
     document.getElementById(book.title).appendChild(header);
     document.getElementById(book.title).appendChild(ul);
     removeButton(book);

@@ -58,3 +58,43 @@ img:hover {
   transition: transform 0.5s ease-in-out;
   transform: rotate(360deg) scale(1.2);
 }
+
+#main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-text {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+#showDialog {
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #0284c7;
+  color: whitesmoke;
+  padding: 12px 17px;
+  border-radius: 10px;
+  border: 0;
+  box-shadow: 11px 10px 13px -6px rgba(66, 68, 90, 1);
+}
+
+#showDialog:hover {
+  transition: transform 0.5s ease-in-out;
+  transform: scale(1.1);
+}
+
+#shelves {
+  width: 90vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 270px);
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  padding: 8px;
+}
