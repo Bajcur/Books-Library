@@ -34,18 +34,22 @@ function displayNewBook(book) {
     const div = document.createElement("div");
     const ul = document.createElement("ul");
     const header = document.createElement("div");
+    const buttons = document.createElement("div");
+    buttons.classList.add("buttons")
     div.classList.add("card");
     ul.classList.add("card-list");
     header.classList.add("header-title");
     div.id = book.title;
     ul.id = `${book.title}-list`;
     header.id = `${book.title}-header`;
+    buttons.id = `${book.title}-buttons`
     header.textContent = book.title.toUpperCase();
     document.getElementById("shelves").appendChild(div);
     document.getElementById(book.title).appendChild(header);
     document.getElementById(book.title).appendChild(ul);
-    removeButton(book);
+    document.getElementById(book.title).appendChild(buttons);
     toggleStatus(book);
+    removeButton(book);
     for (const key in book) {
         if (key === "author") {
             let li = document.createElement("li");
@@ -60,7 +64,17 @@ function displayNewBook(book) {
             li.id = `${book.title}-status`;
             li.textContent = `Status: ${book[key]}`;
             document.getElementById(`${book.title}-list`).appendChild(li);
+
         }
+    }
+    highlight(book);
+}
+
+function highlight(book){
+    if (book.read === "read"){
+        document.getElementById(book.title).style = "border: 4px solid #4ade80";
+    } else {
+        document.getElementById(book.title).style = "border: 4px solid #ef4444";
     }
 }
 
@@ -75,19 +89,24 @@ showButton.addEventListener("click", (event) => {
 
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  let radio = favDialog.querySelector('input[type=radio][name=if_read]:checked');
-  let newBook = new Book(title.value, author.value, pages.value, radio.id);
-  console.log(newBook);
-  addBookToLibrary(newBook);
-  displayNewBook(newBook);
-  favDialog.close();
+  if (title.value != 0) {
+    let radio = favDialog.querySelector('input[type=radio][name=if_read]:checked');
+    let newBook = new Book(title.value, author.value, pages.value, radio.id);
+    console.log(newBook);
+    favDialog.close();
+    addBookToLibrary(newBook);
+    displayNewBook(newBook);
+    highlight(newBook);
+    } else {
+        alert("Please, fill out the form!")
+    }
 });
 
 function removeButton(book) {
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove-buttons");
     removeButton.textContent = "X"
-    document.getElementById(book.title).appendChild(removeButton);
+    document.getElementById(`${book.title}-buttons`).appendChild(removeButton);
     removeButton.addEventListener("click", () => {
         console.log(myLibrary.indexOf(book));
         myLibrary.splice(myLibrary.indexOf(book), 1);
@@ -100,23 +119,26 @@ function toggleStatus(book) {
     const toggleButton = document.createElement("button");
     toggleButton.classList.add("toggle-buttons");
     toggleButton.textContent = "Change read status";
-    document.getElementById(book.title).appendChild(toggleButton);
+    document.getElementById(`${book.title}-buttons`).appendChild(toggleButton);
     toggleButton.addEventListener("click", () => {
         if (book.read === "read") {
             book.read = "not read";
             document.getElementById(`${book.title}-status`).textContent = `Status: ${book.read}`;
+            highlight(book);
             console.log(book);
         } else {
             book.read = "read";
             document.getElementById(`${book.title}-status`).textContent = `Status: ${book.read}`;
+            highlight(book);
             console.log(book);
         }
     })
 
 }
 
+/*
 addBookToLibrary(theHobbit);
 addBookToLibrary(Dune);
 displayLibrary();
 console.log(myLibrary);
-
+*/

@@ -23,21 +23,17 @@ body {
 }
 
 #main {
-  background-color: #e0f2fe ;
+  background-color: #e0f2fe;
   box-shadow: inset 0px 8px 24px -16px rgba(66, 68, 90, 1);
-}
-
-.card {
-    border: solid black 2px;
 }
 
 ::backdrop {
     background-image: linear-gradient(
       45deg,
-      magenta,
-      rebeccapurple,
-      dodgerblue,
-      green
+      #f5d0fe,
+      #d946ef,
+      #a21caf,
+      #4a044e
     );
     opacity: 0.75;
   }
@@ -96,5 +92,37 @@ img:hover {
 }
 
 .card {
-  padding: 8px;
+  padding: 12px;
+  background-color: #7dd3fc;
+  border-radius: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.remove-buttons {
+  color: #dc2626;
+  background: none;
+  border: none;
+	outline: inherit;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.remove-buttons:hover {
+  transition: transform 0.5s ease-in-out;
+  transform: scale(1.4);
+}
+
+.toggle-buttons {
+  border: 1px solid black;
+  background-color: #e0f2fe ;
+  border-radius: 4px;
+  color: black;
+}
+
+.toggle-buttons:hover {
+  box-shadow: inset 0px 0px 6px 0px rgba(81, 87, 81, 1);
 }
