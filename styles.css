@@ -2,7 +2,7 @@ body {
   margin: 0;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: minmax(70px, 1fr) minmax(700px, 20px) minmax(70px, 1fr);
+  grid-template-rows: minmax(70px, 1fr) minmax(700px, 10fr) minmax(70px, 1fr);
   font-family: 'Raleway', sans-serif;
 }
 
@@ -59,6 +59,7 @@ img:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 12px;
 }
 
 .main-text {

@@ -88,15 +88,27 @@ showButton.addEventListener("click", (event) => {
 });
 
 confirmBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (title.value != 0) {
+    event.preventDefault();
     let radio = favDialog.querySelector('input[type=radio][name=if_read]:checked');
     let newBook = new Book(title.value, author.value, pages.value, radio.id);
     console.log(newBook);
-    favDialog.close();
-    addBookToLibrary(newBook);
-    displayNewBook(newBook);
-    highlight(newBook);
+    console.log(myLibrary.length);
+    if (title.value != 0 && myLibrary.length != 0) {
+        for (const book of myLibrary) {
+            if (book.title === newBook.title) {
+                alert ("You have this book already in your library! Please enter a different book.");
+                return;
+            }
+    }
+        favDialog.close();
+        addBookToLibrary(newBook);
+        displayNewBook(newBook);
+        highlight(newBook); 
+    } else if (myLibrary.length === 0){
+        favDialog.close();
+        addBookToLibrary(newBook);
+        displayNewBook(newBook);
+        highlight(newBook);
     } else {
         alert("Please, fill out the form!")
     }
